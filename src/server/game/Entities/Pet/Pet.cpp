@@ -969,6 +969,7 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
                     }
                     break;
                 }
+					
                 case 27829: // Ebon Gargoyle
                 {
                     if (!pInfo)
@@ -981,6 +982,12 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
                     SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel + (petlevel / 4)));
                     break;
                 }
+				case 28017: //Blutwürmer
+				{
+					SetCreateHealth(4 * petlevel);
+					SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, float(petlevel - 30 -(petlevel / 4)) + m_owner->GetTotalAttackPowerValue(BASE_ATTACK) * 0.006f)
+					SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel - 30 + (petlevel / 4)) + m_owner->GetTotalAttackPowerValue(BASE_ATTACK) * 0.006f)
+				}
             }
             break;
         }
