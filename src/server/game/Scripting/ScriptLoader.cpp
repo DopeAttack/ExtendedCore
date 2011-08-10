@@ -1221,14 +1221,20 @@ void AddBattlegroundScripts()
 }
 
 #ifdef SCRIPTS
-/* This is where custom scripts' loading functions should be declared. */
 
+	void AddSC_npc_lottery();
+	void AddSC_npcs_mini_boss();
+	void AddCustomScripts();
+	
 #endif
 
 void AddCustomScripts()
 {
 #ifdef SCRIPTS
-    /* This is where custom scripts should be added. */
+    
+	AddSC_npc_lottery();
+	AddSC_npcs_mini_boss();
+	AddSC_battlemaster_guildvsguild();
 
 #endif
 }
