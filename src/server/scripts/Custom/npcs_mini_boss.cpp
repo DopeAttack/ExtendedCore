@@ -178,7 +178,7 @@ public:
         void KilledUnit(Unit* victim)
         {
             me->MonsterYell(SAY_LIKANTROPO_SLAY, LANG_UNIVERSAL, 0);
-            // In caso di morte di un pg, evoca un worgen dal suo corpo <3 ale
+            // BEschwöre dort wo ein Spieler stirbt einen Worg
             if (victim->GetTypeId() == TYPEID_PLAYER)
                 victim->SummonCreature(SUMMON_WORGEN, victim->GetPositionX(), victim->GetPositionY(), victim->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 60000);
         }
@@ -194,29 +194,29 @@ public:
             if (!UpdateVictim())
                 return;
 
-            // Piccoli Enrage (durata 8 secondi) che raddoppiano il danno ogni 20 sec circa
+            // Enrage
             if (EnrageTimer <= uiDiff)
             {
                 DoCast(me, ENRAGE);
                 EnrageTimer = urand(20000,25000);
             } else EnrageTimer -= uiDiff;
 
-            // Ogni 5 sec applica uno stack di wound che riduce del 5% le cure (max 15 stack)
+            // alle 5 sec stack dazu max 15
             if (WoundTimer <= uiDiff)
             {
                 DoCast(me->getVictim(), MORTAL_WOUND);
                 WoundTimer = 5000;
             } else WoundTimer -= uiDiff;
 
-            // Ogni 20 sec applica un disease che riduce del 50% gli hp e fa 3k ogni 3 sec per 21 sec
+            // 
             if (FeverTimer <= uiDiff)
             {
                 DoCastAOE(DECREPIT_FEVER);
                 FeverTimer = 20000;
             } else FeverTimer -= uiDiff;
 
-            // Ogni 45 secondi Whirlwind che colpisce ad area facendo il danno normale
-            // e contemporaneamente trasforma un target a caso in Worgen, disattivandogli le spell
+            // 45 sec Wirbelwind und 
+            //  1 Spieler in Worg verwandeln
             if (BiteTimer <= uiDiff)
             {
                 DoCast(me, WORGEN_BITE);
@@ -225,7 +225,7 @@ public:
                 BiteTimer = 45000;
             } else BiteTimer -= uiDiff;
 
-            // Ad 80% hp si trasforma in Worgen
+            // bei 80% selber worg werden
             if (HealthBelowPct(80) && !Worgen)
             {
                 me->SetDisplayId(26787);
@@ -235,7 +235,7 @@ public:
                 Worgen = true;
             }
 
-            // Enrage a 15% di vita (aumenta 50% attack speed e 50% damage)
+            // enrage 15%
             if (HealthBelowPct(15) && !Enraged)
             {
                 DoCast(me, FRENZY);
@@ -304,7 +304,6 @@ public:
             if (!UpdateVictim())
                 return;
 
-            // Chain Lightning ogni 10/15 sec
             if (ChainTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -312,7 +311,6 @@ public:
                 ChainTimer = urand(10000,15000);
             } else ChainTimer -= uiDiff;
 
-            // Ogni 15 sec casta Lava Burst su un target random da 8/10k
             if (LavaTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -322,7 +320,6 @@ public:
                 LavaTimer = 15000;
             } else LavaTimer -= uiDiff;
 
-            // Ogni 20 sec casta Earth Shock su un target random
             if (ShockTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -331,8 +328,7 @@ public:
                 DoCast(me, LIGHTNING_RING);
                 ShockTimer = 20000;
             } else ShockTimer -= uiDiff;
-
-            // Ogni 12 sec applica Flame Shock sul tank
+			
             if (FlameTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -340,7 +336,6 @@ public:
                 FlameTimer = 12000;
             } else FlameTimer -= uiDiff;
 
-            // A 25% hp si cura con Healing Wave (solo una volta)
             if (HealthBelowPct(25) && !Healed)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -352,7 +347,6 @@ public:
                 Healed = true;
             }
 
-            // Bloodlust a 50% di vita e Summon Air Elemental
             if (HealthBelowPct(50) && !Haste)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -432,7 +426,7 @@ public:
                 me->SetReactState(REACT_PASSIVE);
                 me->AttackStop();
                 me->RemoveAllAuras();
-                // In Fase 2 evoca 3 Murloc
+
                 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
                     for (uint8 i = 1; i <= 18; i++)
                     {
@@ -458,7 +452,7 @@ public:
 
             if (Phase1)
             {
-                // Ogni 15 sec lancia una spora velenosa ai piedi di un player random
+
                 if (SporeTimer <= uiDiff)
                 {
                     me->InterruptNonMeleeSpells(false);
@@ -474,7 +468,6 @@ public:
                     SporeTimer = 15000;
                 } else SporeTimer -= uiDiff;
 
-                // Poison ad area ogni 10 sec
                 if (PoisonTimer <= uiDiff)
                 {
                     me->InterruptNonMeleeSpells(false);
@@ -482,7 +475,6 @@ public:
                     PoisonTimer = 10000;
                 } else PoisonTimer -= uiDiff;
 
-                // Radici su un target random ogni 25 sec
                 if (RootTimer <= uiDiff)
                 {
                     me->InterruptNonMeleeSpells(false);
@@ -563,7 +555,6 @@ public:
             if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
-            // Multishot ogni 2 sec
             if (MultiTimer <= uiDiff)
             {
                 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0))
@@ -571,14 +562,12 @@ public:
                 MultiTimer = 4000;
             } else MultiTimer -= uiDiff;
 
-            // Ogni 10 sec casta Volley su un target random
             if (VolleyTimer <= uiDiff)
             {
                 DoCastAOE(SPELL_VOLLEY);
                 VolleyTimer = 15000;
             } else VolleyTimer -= uiDiff;
 
-            // Ogni 5 sec casta Snake Trap su un target random
             if (SnakeTimer <= uiDiff)
             {
                 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
@@ -589,14 +578,12 @@ public:
                 SnakeTimer = 5000;
             } else SnakeTimer -= uiDiff;
 
-            // Poison ad area ogni 10 sec
             if (PoisonTimer <= uiDiff)
             {
                 DoCastAOE(SPELL_BOLT_VOLLEY);
                 PoisonTimer = 12000;
             } else PoisonTimer -= uiDiff;
 
-            // Ogni 20 sec casta Frost Trap sul tank
             if (TrapTimer <= uiDiff)
             {
                 me->MonsterYell(SAY_SYLVANAS_ICE, LANG_UNIVERSAL, 0);
@@ -604,7 +591,6 @@ public:
                 TrapTimer = 20000;
             } else TrapTimer -= uiDiff;
 
-            // Ogni 25 sec casta Rejuvenation
             if (HealTimer <= uiDiff)
             {
                 DoCast(me, SPELL_REJUVENATION);
@@ -670,21 +656,21 @@ public:
             if (!UpdateVictim())
                 return;
 
-            // Ogni 5 sec fa Cleave
+
             if (CleaveTimer <= uiDiff)
             {
                 DoCast(me->getVictim(), SPELL_CLEAVE);
                 CleaveTimer = 5000;
             } else CleaveTimer -= uiDiff;
 
-            // Ogni 20 sec fa un War Stomp che stunna ad area
+
             if (StompTimer <= uiDiff)
             {
                 DoCastAOE(SPELL_WAR_STOMP);
                 StompTimer = 20000;
             } else StompTimer -= uiDiff;
 
-            // Summon Fire Elemental ogni 30 sec
+
             if (FireTimer <= uiDiff)
             {
                 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
@@ -692,7 +678,7 @@ public:
                 FireTimer = 30000;
             } else FireTimer -= uiDiff;
 
-            // Enrage a 25% di vita (aumenta 40% attack speed e 25% damage)
+
             if (HealthBelowPct(25) && !Enraged)
             {
                 me->MonsterYell(SAY_TROLLZILLA_FRENZY, LANG_UNIVERSAL, 0);
@@ -760,7 +746,6 @@ public:
             if (!UpdateVictim())
                 return;
 
-            // Shadow Burst ad area e reset threat
             if (BurstTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -769,7 +754,6 @@ public:
                 BurstTimer = urand(25000,35000);
             } else BurstTimer -= uiDiff;
 
-            // Storm of Grief ogni 20 sec colpisce ad area
             if (GriefTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -778,7 +762,6 @@ public:
                 GriefTimer = 20000;
             } else GriefTimer -= uiDiff;
 
-            // Ogni 10 sec casta Piercing Shadow sul target a maggior aggro dopo il tank
             if (PiercingTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -787,7 +770,6 @@ public:
                 PiercingTimer = 10000;
             } else PiercingTimer -= uiDiff;
 
-            // Ogni 15 sec casta Shadow Flame che fa danno a cono
             if (FlameTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -795,7 +777,6 @@ public:
                 FlameTimer = 15000;
             } else FlameTimer -= uiDiff;
 
-            // Ogni 45 sec casta Harvest Soul su tutto il raid
             if (HarvestTimer <= uiDiff)
             {
                 me->InterruptNonMeleeSpells(false);
@@ -863,14 +844,12 @@ public:
             if (!UpdateVictim())
                 return;
 
-            // Earthquake Ogni 20 secondi.
             if (EarthquakeTimer <= uiDiff)
             {
                 DoCast(EARTHQUAKE);
                 EarthquakeTimer = 20000;
             } else EarthquakeTimer -= uiDiff;
 
-            // Whirlwind Ogni 30 sec
             if (WhirlwindTimer <= uiDiff)
             {
                 me->MonsterYell(SAY_UZNAM_SPECIAL, LANG_UNIVERSAL, 0);
@@ -879,7 +858,6 @@ public:
                 WhirlwindTimer = 30000;
             } else WhirlwindTimer -= uiDiff;
 
-            // Shock of sorrow Ogni 40 sec.
             if (ShockTimer <= uiDiff)
             {
                 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
@@ -887,7 +865,6 @@ public:
                 ShockTimer = 40000;
             } else ShockTimer -= uiDiff;
             
-            // Aural Shock Ogni minuto
             if (AuralShockTimer <= uiDiff)
             {
                 DoCast(AURAL_SHOCK);
