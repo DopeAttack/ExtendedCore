@@ -8,7 +8,7 @@
 /* ScriptData
 SDName: Extended-WoW Custom Bosse
 SDAuthor: DopeAttack
-SDComment: 
+SDComment: 15% Wird Ã¼berarbeitet
 SDCategory: Eigene Bosse
 EndScriptData */
 
@@ -26,8 +26,8 @@ enum SaphosSpells
 
 // Saphos Aggro Schreie
 #define SAY_SAPHOS_AGGRO			"Ihr werdet mich nie besiegen!"
-#define SAY_SAPHOS_BERSERK			"Jetzt bin ich Wütend!"
-#define SAY_SAPHOS_FREEZE			"Spürt die Macht der Frostzauber!"
+#define SAY_SAPHOS_BERSERK			"Jetzt bin ich Wï¿½tend!"
+#define SAY_SAPHOS_FREEZE			"Spï¿½rt die Macht der Frostzauber!"
 #define SAY_SAPHOS_DEATH			"Arh...Saa.."
 
 // Hakkar Deklaration
@@ -37,45 +37,45 @@ enum HakkarSpells
 	TEUFELSFEUERBALL			=					66532, // 1,30 2 ziele
 	FLUCH_VON_HAKKAR			=					18502, // alle 2,5 min 5 ziele
 	TEUFELSHITZE				=					67044, // 30 sec
-	TEUFELSFLAMMENSTOß			=					66495  // 1 min
+	TEUFELSFLAMMENSTOï¿½			=					66495  // 1 min
 };
 
 // Hakkar Aggro Schreie
 #define SAY_HAKKAR_AGGRO			"Ihr nichts nuzigen Kreaturen"
 #define SAY_HAKKAR_SUMMON			"Diener zu mir"
 #define SAY_HAKKAR_FIRE				"Brennt in den Flammen"
-#define SAY_HAKKAR_BERSERK			"Spürt meinen Zorn"
+#define SAY_HAKKAR_BERSERK			"Spï¿½rt meinen Zorn"
 #define SAY_HAKKAR_DEATH			"Wie nur?"
 
-// Tau´dan Deklaration
+// Tauï¿½dan Deklaration
 enum TaudanSpells
 {
 	SCHATTENSCHLEIER		=						24647, // auf ziel mit aggro
 	AURA_DER_DUNKELHEIT		=						69491, // aktiv bei kampfbegin (aura , DoCastAOE)!
-	SÄULE_DES_LEIDS			=						59727,
-	STRUM_DER_TRAUER		=						59772 // zufälliges ziel
+	Sï¿½ULE_DES_LEIDS			=						59727,
+	STRUM_DER_TRAUER		=						59772 // zufï¿½lliges ziel
 };
 
-- Säule des Leids (59727)			
+- Sï¿½ule des Leids (59727)			
 - Schattenschleier (24674)			(auf ziel mit aggro)
-- Sturm der Trauer (59772)			(auf zufälliges ziel)
+- Sturm der Trauer (59772)			(auf zufï¿½lliges ziel)
 
 // Tau'dan Schreie
 
-#define SAY_TAUDAN_AGGRO		"Fühlt die Aura der Dunkelheit"
+#define SAY_TAUDAN_AGGRO		"Fï¿½hlt die Aura der Dunkelheit"
 #define SAY_TAUDAN_DEATH		"Nein! ... wieso??"
-#define SAY_TAUDAN_SCHLAG		"Spürt die Macht des Flammenschlags"
+#define SAY_TAUDAN_SCHLAG		"Spï¿½rt die Macht des Flammenschlags"
 
 // Auraleus Deklaration
 
 enum AuraleusSpells
 {
 	BLITZSCHLAGWELLE		=						24819, //alle 3 sec standartattacke
-	STATISCHE_ÜBERLADUNG	=						59795,
+	STATISCHE_ï¿½BERLADUNG	=						59795,
 	KETTENBLITZSCHLAG		=						63479,
 	DONNER					=						53630,
-	MANA_ENTZÜNDEN			=						46543, //selten alle 4 min zufälliges ziel
-	ÜBERLADEN				=						63481, // bei 75% ,50%,25% 
+	MANA_ENTZï¿½NDEN			=						46543, //selten alle 4 min zufï¿½lliges ziel
+	ï¿½BERLADEN				=						63481, // bei 75% ,50%,25% 
 	BLITZRANKEN				=						61887, // unter 5%
 	RASEREI					=						57086 // unter 5%
 
@@ -89,8 +89,8 @@ enum AuraleusSpells
 
 enum KazagoreSpells
 {
-	ZERREIßENDES_SPALTEN	=						25174,
-	TÖDLICHER_STOß			=						15708,
+	ZERREIï¿½ENDES_SPALTEN	=						25174,
+	Tï¿½DLICHER_STOï¿½			=						15708,
 	DONNERKNALL				=						63757,
 	WIRBELWIND				=						59322, // 75% 50% 25%
 	RASEREI					=						28131 // unter 5%
@@ -104,8 +104,8 @@ enum KazagoreSpells
 
 enum NyrocielSpells
 {
-	ZERREIßENDES_SPALTEN	=						25174,
-	TÖDLICHER_STOß			=						15708,
+	ZERREIï¿½ENDES_SPALTEN	=						25174,
+	Tï¿½DLICHER_STOï¿½			=						15708,
 	DONNERKNALL				=						63757,
 	WIRBELWIND				=						59322, // 75% 50% 25%
 	RASEREI					=						28131 // unter 5%
@@ -118,7 +118,7 @@ enum NyrocielSpells
 // Kirgam Deklaration
 enum KirgamSpells
 {
-	GEISTERSTOß					=						
+	GEISTERSTOï¿½					=						
 	GERINGE_WELLE_DER_HEILUNG	=
 	ENTWAFFNEN					=
 	
@@ -237,7 +237,7 @@ public:
 			uint32 FluchvonHakkarTimer;
 			uint32 TeufelshitzeTimer;
 			uint32 TeufelsinfernoTimer;
-			uint32 TeufelsjägerTimer;
+			uint32 Teufelsjï¿½gerTimer;
 			bool Berserk;
 			bool Raserei;
 			bool Phase1;
@@ -249,7 +249,7 @@ public:
 				FluchvonHakkarTimer		= 17000;
 				TeufelshitzeTimer		= 9000;
 				TeufelsinfernoTimer		= 13000;
-				TeufelsjägerTimer		= 25000;
+				Teufelsjï¿½gerTimer		= 25000;
 				Berserk					= false;
 				Raserei					= false;
 				Phase1					= false;
@@ -271,18 +271,18 @@ public:
 				if(!UpdateVictim())
 				return;
 				
-				// Beschwörung Phase 2
+				// Beschwï¿½rung Phase 2
 				if(Phase2Timer <= uiDiff)
 				{
 					Phase1 = false;
 					me->InterruptNonMeleeSpells(false);
 					me->RemoveAllAuras();
 					me->DeleteThreatList();
-					// In Phase 2 4 Teufelsjäger
+					// In Phase 2 4 Teufelsjï¿½ger
 						 if (Unit *pTarget = SelectTarget(SELECT_TARGET_RANDOM,0))
 							for (uint8 i = 1; i <= 4; i++)
 							{
-								me->SummonCreature(TEUFELSJÄGER_BESCHWÖREN, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 60000);
+								me->SummonCreature(TEUFELSJï¿½GER_BESCHWï¿½REN, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0, TEMPSUMMON_TIMED_DESPAWN, 60000);
 							}
 					me->MonsterYell(SAY_HAKKAR_SUMMON, LANG_UNIVERSAL, 0);
 					Phase2Timer = 60000;
